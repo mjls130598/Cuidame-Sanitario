@@ -49,6 +49,15 @@
             android:layout_width="match_parent"
             android:layout_height="36dp" />
 
+        <Spinner
+            android:id="@+id/trabajo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+
         <EditText
             android:id="@+id/inputNewContrasenia"
             android:layout_width="match_parent"
