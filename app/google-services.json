@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "577309888566",
+    "firebase_url": "https://cuidame-c463c-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "cuidame-c463c",
+    "storage_bucket": "cuidame-c463c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577309888566:android:3a1c905fa817fb9d578897",
+        "android_client_info": {
+          "package_name": "com.gidm.cuidame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577309888566-8tflttldelqbakaekikdramoh0raujf3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gidm.cuidame",
+            "certificate_hash": "a2689d0cc2809528bb160eb1d5b86e419e3fd9e4"
+          }
+        },
+        {
+          "client_id": "577309888566-richn8t5s2scsa6nb200lht9p0k628gk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi2ZbchWcWhl3OYHn1SRHgzauVBVmJz_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577309888566-richn8t5s2scsa6nb200lht9p0k628gk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
