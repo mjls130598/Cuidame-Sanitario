@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         // Si clickea sobre "Salir"
         logout.setOnClickListener{
+
+            // Cierra la sesión en Firebase
+            FirebaseAuth.getInstance().signOut()
 
             // Se elimina los datos de la memoria local
             with(shared.edit()){

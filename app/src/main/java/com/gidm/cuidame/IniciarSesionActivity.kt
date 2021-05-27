@@ -7,6 +7,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class IniciarSesionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,20 +42,52 @@ class IniciarSesionActivity : AppCompatActivity() {
                     // Obtenemos el ID del usuario
                     val usuarioID = auth.currentUser!!.uid
 
-                    // Guarda el ID del usuario en su memoria local
-                    val shared = getSharedPreferences("datos-sanitario", MODE_PRIVATE) ?:
-                        return@addOnCompleteListener
+                    // Comprobamos que es un sanitario el que ha iniciado sesión
+                    val especialidadUsuario = FirebaseDatabase.getInstance().getReference("Usuarios").
+                        child(usuarioID).child("especialidad")
 
-                    with(shared.edit()){
-                        putString("id", usuarioID)
-                        commit()
-                    }
+                    especialidadUsuario.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                    // Nos dirigimos al menú principal
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
+                            val especialidad = dataSnapshot.getValue(String::class.java)
+
+                            // Si no tiene guardada una especialidad, ...
+                            if(especialidad == null) {
+                                // Cierra la sesión en Firebase
+                                FirebaseAuth.getInstance().signOut()
+
+                                Toast.makeText(
+                                    this@IniciarSesionActivity,
+                                    "No eres un sanitario", Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            else {
+                                runOnUiThread {
+                                    // Guarda el ID del usuario en su memoria local
+                                    val shared =
+                                        getSharedPreferences("datos-sanitario", MODE_PRIVATE)
+
+                                    with(shared.edit()) {
+                                        putString("id", usuarioID)
+                                        commit()
+                                    }
+
+                                    // Nos dirigimos al menú principal
+                                    val intent = Intent(
+                                        this@IniciarSesionActivity,
+                                        MainActivity::class.java
+                                    )
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {}
+                    })
                 }
 
                 else {
