@@ -1,6 +1,10 @@
 package com.gidm.cuidame
 
 import android.content.Context
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 
 object Utils {

@@ -36,7 +36,7 @@ class RegistrarseActivity : AppCompatActivity() {
 
         var especialidad = ""
         // Cuando seleccione una opción de la lista, ...
-        spinner.onItemSelectedListener = object : OnItemSelectedListener {
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 // Se lo indicamos al usuario
                 Toast.makeText(
