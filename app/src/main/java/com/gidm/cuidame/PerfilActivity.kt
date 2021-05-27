@@ -47,7 +47,7 @@ class PerfilActivity : AppCompatActivity() {
 
         val nombre = findViewById<TextView>(R.id.nombre)
         val email = findViewById<TextView>(R.id.email)
-        shared = getSharedPreferences("datos-paciente", MODE_PRIVATE)
+        shared = getSharedPreferences("datos-sanitario", MODE_PRIVATE)
 
         // Obtenemos el id del usuario
         val id = shared.getString("id", null)

@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Miramos si hay algún id en la memoria del dispositivo
-        val shared = getSharedPreferences("datos-paciente", MODE_PRIVATE) ?: return
+        val shared = getSharedPreferences("datos-sanitario", MODE_PRIVATE) ?: return
         val id = shared.getString("id", null)
 
         // Sino lo hay, ...

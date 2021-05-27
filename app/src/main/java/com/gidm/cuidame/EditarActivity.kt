@@ -25,7 +25,7 @@ class EditarActivity : AppCompatActivity() {
         val guardar = findViewById<Button>(R.id.nuevoUsuario)
 
         // Recogemos el id del usuario activo
-        val shared = getSharedPreferences("datos-paciente", MODE_PRIVATE)
+        val shared = getSharedPreferences("datos-sanitario", MODE_PRIVATE)
         val id = shared.getString("id", null)
 
         // Creamos las instancias a las distintas BBDD

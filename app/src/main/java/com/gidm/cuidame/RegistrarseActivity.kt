@@ -63,7 +63,7 @@ class RegistrarseActivity : AppCompatActivity() {
                             if (it2.isSuccessful){
 
                                 // Guarda el ID del usuario en su memoria local
-                                val shared = getSharedPreferences("datos-paciente", MODE_PRIVATE)
+                                val shared = getSharedPreferences("datos-sanitario", MODE_PRIVATE)
                                     ?: return@addOnCompleteListener
 
                                 with(shared.edit()){
