@@ -1,11 +1,11 @@
 package com.gidm.cuidame
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.view.View
+import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -27,6 +27,29 @@ class RegistrarseActivity : AppCompatActivity() {
         val contraseniaInput = findViewById<EditText>(R.id.inputNewContrasenia)
         val contraseniaRepInput = findViewById<EditText>(R.id.inputNewContrasenia2)
         val guardar = findViewById<Button>(R.id.nuevoUsuario)
+        val spinner = findViewById<Spinner>(R.id.trabajo)
+
+        // Creamos la lista de posibles trabajos
+        val adapter = ArrayAdapter.createFromResource(this, R.array.trabajos,
+            R.layout.item_lista_trabajos)
+        spinner.adapter = adapter
+
+        var especialidad = ""
+        // Cuando seleccione una opción de la lista, ...
+        spinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                // Se lo indicamos al usuario
+                Toast.makeText(
+                    adapterView.context, "Especialidad: " +
+                            " " + adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT
+                ).show()
+
+                // Lo guardamos para su futuro uso
+                especialidad = adapterView.getItemAtPosition(i).toString()
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
 
         // Si se pulsa sobre "Guardar", ...
         guardar.setOnClickListener{
@@ -38,7 +61,8 @@ class RegistrarseActivity : AppCompatActivity() {
             val contraseniaRep =  contraseniaRepInput.text.toString()
 
             // Si los datos introducidos son correctos, ...
-            if(Utils.comprobarUsuario(nombre, correo, contrasenia, contraseniaRep, this)){
+            if(Utils.comprobarUsuario(nombre, correo, contrasenia, contraseniaRep,
+                    especialidad,this)){
 
                 // Creamos la autenticación del nuevo usuario en la BD
                 auth.createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{

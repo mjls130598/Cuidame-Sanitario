@@ -13,4 +13,14 @@
     <string name="logout">Salir</string>
     <string name="editar">Editar cuenta</string>
     <string name="borrar">Borrar cuenta</string>
+    <string-array name="trabajos">
+        <item>Médico de Familia</item>
+        <item>Psiquiatra</item>
+        <item>Dermatólogo</item>
+        <item>Psicólogo</item>
+        <item>Fisioterapeuta</item>
+        <item>Cardiólogo</item>
+        <item>Pediatra</item>
+        <item>Oftalmólogo</item>
+    </string-array>
 </resources>

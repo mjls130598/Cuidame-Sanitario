@@ -5,11 +5,11 @@ import android.widget.Toast
 
 object Utils {
     fun comprobarUsuario(nombre: String, correo: String, contrasenia1: String,
-                         contrasenia2: String, context: Context) : Boolean{
+                         contrasenia2: String, especialidad: String, context: Context) : Boolean{
 
         var correcto = true
 
-        if(nombre == "" || correo == "" || contrasenia1 == "" || contrasenia2 == ""){
+        if(nombre == "" || correo == "" || contrasenia1 == "" || contrasenia2 == "" || especialidad == ""){
             Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show()
             correcto = false
         }
