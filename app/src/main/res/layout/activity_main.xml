@@ -91,7 +91,7 @@
             <LinearLayout
                 android:id="@+id/sanitarios"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -107,51 +107,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/sanitarios"
+                    android:text="@string/pacientes"
                     android:textColor="@color/blue_oscuro"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/añadirSanitarios"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/añadirSanitariosImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    app:srcCompat="@drawable/ic_outline_person_add_alt_1_24" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/añadir_sanitarios"
-                    android:textColor="@color/blue_oscuro"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="36dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/logout"
-                android:layout_width="match_parent"
+                android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -173,6 +137,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
