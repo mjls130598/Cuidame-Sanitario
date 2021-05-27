@@ -47,6 +47,7 @@ class PerfilActivity : AppCompatActivity() {
 
         val nombre = findViewById<TextView>(R.id.nombre)
         val email = findViewById<TextView>(R.id.email)
+        val especialidad = findViewById<TextView>(R.id.especialidad)
         shared = getSharedPreferences("datos-sanitario", MODE_PRIVATE)
 
         // Obtenemos el id del usuario
@@ -58,12 +59,20 @@ class PerfilActivity : AppCompatActivity() {
         if (id != null){
             // Accedemos a los datos del usuario
             val nombreUsuario = datosUsuario.child("nombre")
+            val especialidadUsuario = datosUsuario.child("especialidad")
 
             // Los mostramos por pantalla
             if(usuario != null){
                 nombreUsuario.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         nombre.text = dataSnapshot.getValue(String::class.java)
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {}
+                })
+                especialidadUsuario.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        especialidad.text = dataSnapshot.getValue(String::class.java)
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {}

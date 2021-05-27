@@ -23,4 +23,5 @@
         <item>Pediatra</item>
         <item>Oftalmólogo</item>
     </string-array>
+    <string name="especialidad">Especialidad</string>
 </resources>

@@ -55,6 +55,18 @@
             android:layout_width="match_parent"
             android:layout_height="34dp" />
 
+        <TextView
+            android:id="@+id/especialidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/especialidad"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="34dp" />
+
         <Button
             android:id="@+id/editar"
             android:layout_width="match_parent"
