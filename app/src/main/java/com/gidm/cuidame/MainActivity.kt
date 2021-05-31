@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         // Obtenemos los distintos botones del menú
         val perfil = findViewById<LinearLayout>(R.id.perfil)
         val logout = findViewById<LinearLayout>(R.id.logout)
+        val pacientes = findViewById<LinearLayout>(R.id.pacientes)
+        val chats = findViewById<LinearLayout>(R.id.chats)
 
         // Si clickea sobre "Perfil"
         perfil.setOnClickListener {
@@ -46,6 +48,16 @@ class MainActivity : AppCompatActivity() {
 
             cambiarActividad(IniciarSesionActivity::class.java)
             finish()
+        }
+
+        // Si pulsa sobre "Mis Pacientes"
+        pacientes.setOnClickListener {
+            cambiarActividad(MisPacientesActivity::class.java)
+        }
+
+        // Si pulsa sobre "Chats"
+        chats.setOnClickListener {
+            cambiarActividad(ChatsActivity::class.java)
         }
     }
 
