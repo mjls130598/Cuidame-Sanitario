@@ -2,7 +2,6 @@ package com.gidm.cuidame
 
 import android.app.Dialog
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 
 
@@ -18,7 +18,7 @@ class PerfilActivity : AppCompatActivity() {
 
     lateinit var dialogFragment: AlertaDialogFragment
     private lateinit var datosUsuario: DatabaseReference
-    private lateinit var shared : SharedPreferences
+    private lateinit var usuario : FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,39 +47,22 @@ class PerfilActivity : AppCompatActivity() {
 
         val nombre = findViewById<TextView>(R.id.nombre)
         val email = findViewById<TextView>(R.id.email)
-        val especialidad = findViewById<TextView>(R.id.especialidad)
-        shared = getSharedPreferences("datos-sanitario", MODE_PRIVATE)
-
-        // Obtenemos el id del usuario
-        val id = shared.getString("id", null)
-        val usuario = FirebaseAuth.getInstance().currentUser!!
+        usuario = FirebaseAuth.getInstance().currentUser!!
         datosUsuario = FirebaseDatabase.getInstance().
         getReference("Usuarios").child(usuario.uid)
 
-        if (id != null){
-            // Accedemos a los datos del usuario
-            val nombreUsuario = datosUsuario.child("nombre")
-            val especialidadUsuario = datosUsuario.child("especialidad")
+        // Accedemos a los datos del usuario
+        val nombreUsuario = datosUsuario.child("nombre")
 
-            // Los mostramos por pantalla
-            if(usuario != null){
-                nombreUsuario.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        nombre.text = dataSnapshot.getValue(String::class.java)
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {}
-                })
-                especialidadUsuario.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        especialidad.text = dataSnapshot.getValue(String::class.java)
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {}
-                })
-                email.text = usuario.email
+        // Los mostramos por pantalla
+        nombreUsuario.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                nombre.text = dataSnapshot.getValue(String::class.java)
             }
-        }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+        email.text = usuario.email
 
         super.onStart()
     }
@@ -88,6 +71,29 @@ class PerfilActivity : AppCompatActivity() {
         if (continuar) {
 
             // Se borra la infomación del usuario en la BD
+
+            // En otras cuentas
+            datosUsuario.child("pacientes").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    // Obtenemos los sanitarios del usuario
+                    val sanitariosUsuario = if(snapshot.value != null){
+                        snapshot.value as HashMap<String, String>
+                    } else null
+
+                    // Borramos para cada sanitario este paciente
+                    if(sanitariosUsuario != null){
+                        for((_, value) in sanitariosUsuario){
+                            Utils.borrarPaciente(value, usuario.uid)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
+
+            // En la suya
             datosUsuario.removeValue()
 
             // Se borra la autenticación
@@ -95,7 +101,7 @@ class PerfilActivity : AppCompatActivity() {
                 // Si se ha borrado correctamente
                 if(it.isSuccessful){
                     // Borramos el id de la memoria local
-                    with(shared.edit()){
+                    with(getSharedPreferences("datos-paciente",MODE_PRIVATE).edit()){
                         remove("id")
                         commit()
                     }

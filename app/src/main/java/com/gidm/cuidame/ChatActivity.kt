@@ -95,6 +95,7 @@ class ChatActivity : AppCompatActivity() {
                 })
 
                 mensajeInput.setText("")
+                actualizarLista()
             }
         }
     }
