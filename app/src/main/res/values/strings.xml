@@ -9,7 +9,7 @@
     <string name="correo">Email</string>
     <string name="perfil">Perfil</string>
     <string name="chats">Chats</string>
-    <string name="pacientes">Tus pacientes</string>
+    <string name="pacientes">Mis pacientes</string>
     <string name="logout">Salir</string>
     <string name="editar">Editar cuenta</string>
     <string name="borrar">Borrar cuenta</string>
@@ -24,4 +24,5 @@
         <item>Oftalmólogo</item>
     </string-array>
     <string name="especialidad">Especialidad</string>
+    <string name="editMensaje">Introduzca el mensaje</string>
 </resources>

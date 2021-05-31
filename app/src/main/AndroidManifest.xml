@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cuidame">
-        <activity android:name=".EditarActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".ChatsActivity" />
+        <activity android:name=".MisPacientesActivity" />
+        <activity android:name=".EditarActivity"/>
         <activity android:name=".PerfilActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
