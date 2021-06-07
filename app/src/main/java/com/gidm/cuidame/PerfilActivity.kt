@@ -47,6 +47,7 @@ class PerfilActivity : AppCompatActivity() {
 
         val nombre = findViewById<TextView>(R.id.nombre)
         val email = findViewById<TextView>(R.id.email)
+        val especialidad = findViewById<TextView>(R.id.especialidad)
         usuario = FirebaseAuth.getInstance().currentUser!!
         datosUsuario = FirebaseDatabase.getInstance().
         getReference("Usuarios").child(usuario.uid)
@@ -62,6 +63,18 @@ class PerfilActivity : AppCompatActivity() {
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+
+        val especialidadUsuario = datosUsuario.child("especialidad")
+
+        especialidadUsuario.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                especialidad.text = snapshot.getValue(String::class.java)
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
+
         email.text = usuario.email
 
         super.onStart()
