@@ -116,7 +116,7 @@ class ChatActivity : AppCompatActivity() {
         val chats = db.child("Usuarios").child(idUsuario).
         child("chats")
 
-        chats.addListenerForSingleValueEvent(object : ValueEventListener{
+        chats.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 // Se mira si se ha comenzado una conversación con él
